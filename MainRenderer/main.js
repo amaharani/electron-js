@@ -12,12 +12,17 @@ let winOne, winTwo;
 
 function createWindow(){
     winOne = new BrowserWindow({
-        webPreference:{
-            nativeWindowOpen: true,
+        webPreferences:{
             nodeIntegration: true,
-            enableRemoteModule: true,
-//            contextIsolation: true,
+            contextIsolation: false,
+            enableRemoteModule: true
         }
+        // webPreference:{
+        //     nativeWindowOpen: true,
+        //     nodeIntegration: false,
+        //     enableRemoteModule: false,
+        //     contextIsolation: true
+        // }
     });
     winTwo = new BrowserWindow();
 
