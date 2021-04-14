@@ -1,0 +1,40 @@
+/* Kalkulator */
+.display{
+    background-color:cyan;
+    padding: 10px;
+    width: 205px;
+    height: 40px;
+    text-align: right;
+}
+.prev{
+    color:darkslategray;
+    font-size: large;
+}
+.curr{
+    font-size: x-large;
+}
+button{
+    cursor: pointer;
+    background-color:magenta;
+    margin-top: 10px;
+    width: 53px;
+    height: 30px;
+    text-align: center;
+    font-size: medium;
+}
+
+/* Konversi Suhu */
+.suhu{
+    width: 200px;
+    height: 40px;
+}
+input{
+    width: 200px;
+    height: 40px;
+    background-color: darkslateblue;
+    color:orchid;
+    font-size: medium;
+}
+::placeholder{
+    color: mediumpurple;
+}

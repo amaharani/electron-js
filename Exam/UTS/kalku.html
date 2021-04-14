@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalkulator</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <div class="mainKalkulator">
+        <div class="display">
+            <!-- <p>1801010040</p> -->
+            <div data-previous class="prev"></div>
+            <div data-current class="curr"></div>
+        </div>
+        <div class="row-satu">
+            <button data-clear style="width: 110px; background-color: mediumpurple;">AC</button>
+            <button data-delete style="background-color: mediumpurple;">DEL</button>
+            <button data-operation style="background-color: orchid;">/</button>
+        </div>
+        <div class="row-dua">
+            <button data-num>7</button>
+            <button data-num>8</button>
+            <button data-num>9</button>
+            <button data-operation style="background-color: orchid;">x</button>
+        </div>
+        <div class="row-tiga">
+            <button data-num>4</button>
+            <button data-num>5</button>
+            <button data-num>6</button>
+            <button data-operation style="background-color: orchid;">-</button>
+        </div>
+        <div class="row-empat">
+            <button data-num>1</button>
+            <button data-num>2</button>
+            <button data-num>3</button>
+            <button data-operation style="background-color: orchid;">+</button>
+        </div>
+        <div class="row-lima">
+            <button data-num style="width: 110px;">0</button>
+            <button data-num style="background-color: mediumpurple;">.</button>
+            <button data-equals style="background-color: salmon;">=</button>
+        </div>
+    </div>
+    <script>
+        class Kalkulator{
+            constructor(previousTextElement, currentTextElement){
+                this.previousTextElement = previousTextElement;
+                this.currentTextElement = currentTextElement;
+                this.clear();
+            }
+
+            //menghapus semua
+            clear(){
+                this.prevOperand = '';
+                this.currOperand = '';
+                this.operation = undefined;
+            }
+
+            //menghapus 1 angka
+            delete(){
+                this.currOperand = this.currOperand.slice(0, -1);
+            }
+
+            //klik nomor
+            appendNumber(number){
+                if(number === '.' && this.currOperand.includes('.')) return;
+                this.currOperand = this.currOperand.toString() + number.toString();
+            }
+
+            //klik operasi
+            chooseOperation(operation){
+                if(this.currOperand === '') return;
+                if(this.prevOperand !== ''){
+                    this.compute();
+                }
+                this.operation = operation;
+                this.prevOperand = this.currOperand + operation;
+                this.currOperand = '';
+            }
+
+            //memproses
+            compute(){
+                let computation;
+                const prev = parseFloat(this.prevOperand);
+                const curr = parseFloat(this.currOperand);
+                if(isNaN(prev) || isNaN(curr)) return;
+                switch(this.operation){
+                    case '+':
+                        computation = prev + curr
+                        break
+                    case '-':
+                        computation = prev - curr
+                        break
+                    case 'x':
+                        computation = prev * curr
+                        break
+                    case '/':
+                        computation = prev / curr
+                        break
+                    default: return
+                }
+                this.currOperand = computation;
+                this.operation = undefined;
+                this.prevOperand = '';
+            }
+
+            //memperbarui display
+            updateDisplay(){
+                this.currentTextElement.innerText = this.currOperand;
+                this.previousTextElement.innerText = this.prevOperand;
+            }
+        }
+        
+        const numBtn = document.querySelectorAll('[data-num]');
+        const operationBtn = document.querySelectorAll('[data-operation]');
+        const equalsBtn = document.querySelector('[data-equals]');
+        const delBtn = document.querySelector('[data-delete]');
+        const acBtn = document.querySelector('[data-clear]');
+        const previousTextElement = document.querySelector('[data-previous]');
+        const currentTextElement = document.querySelector('[data-current]');
+
+        const kalkulator = new Kalkulator(previousTextElement, currentTextElement);
+
+        numBtn.forEach(button => {
+            button.addEventListener('click', () => {
+                kalkulator.appendNumber(button.innerText);
+                kalkulator.updateDisplay();
+            });
+        });
+        operationBtn.forEach(button => {
+            button.addEventListener('click', () => {
+                kalkulator.chooseOperation(button.innerText);
+                kalkulator.updateDisplay();
+            });
+        });
+        equalsBtn.addEventListener('click', button => {
+            kalkulator.compute();
+            kalkulator.updateDisplay();
+        });
+        delBtn.addEventListener('click', button => {
+            kalkulator.delete();
+            kalkulator.updateDisplay();
+        });
+        acBtn.addEventListener('click', button => {
+            kalkulator.clear();
+            kalkulator.updateDisplay();
+        });
+    </script>
+</body>
+</html>

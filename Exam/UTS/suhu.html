@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Konversi Suhu</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <h4>Masukkan suhu awal/yang diketahui sesuai dengan jenis termometer</h4>
+    <div class="suhu">
+        <div id="celcius">
+            <input type="number" placeholder="Celcius ... (°C)">
+        </div>
+        <div id="reamur">
+            <input type="number" placeholder="Reamur ... (°R)">
+        </div>
+        <div id="fahrenheit">
+            <input type="number" placeholder="Fahrenheit ... (°F)">
+        </div>
+        <div id="kelvin">
+            <input type="number" placeholder="Kelvin ... (K)">
+        </div>
+    </div>
+    <script>
+        const celciusInput = document.querySelector('#celcius > input');
+        const reamurInput = document.querySelector('#reamur > input');
+        const fahrenheitInput = document.querySelector('#fahrenheit > input');
+        const kelvinInput = document.querySelector('#kelvin > input');
+
+        celciusInput.addEventListener('input', function(){
+            const cTemperatur = parseFloat(celciusInput.value);
+            const rTemperatur = (4/5)*cTemperatur;
+            const fTemperatur = ((9/5)*cTemperatur)+32;
+            const kTemperatur = cTemperatur+273;
+            
+            reamurInput.value = rTemperatur;
+            fahrenheitInput.value = fTemperatur;
+            kelvinInput.value = kTemperatur;
+        });
+
+        reamurInput.addEventListener('input', function(){
+            const rTemperatur = parseFloat(reamurInput.value);
+            const cTemperatur = (5/4)*rTemperatur;
+            const fTemperatur = ((9/4)*rTemperatur)+32;
+            const kTemperatur = cTemperatur+273;
+            
+            celciusInput.value = cTemperatur;
+            fahrenheitInput.value = fTemperatur;
+            kelvinInput.value = kTemperatur;
+        });
+
+        fahrenheitInput.addEventListener('input', function(){
+            const fTemperatur = parseFloat(fahrenheitInput.value);
+            const cTemperatur = (5/9)*(fTemperatur-32);
+            const rTemperatur = (4/9)*(fTemperatur-32);
+            const kTemperatur = cTemperatur+273;
+            
+            celciusInput.value = cTemperatur;
+            reamurInput.value = rTemperatur;
+            kelvinInput.value = kTemperatur;
+        });
+
+        kelvinInput.addEventListener('input', function(){
+            const kTemperatur = parseFloat(kelvinInput.value);
+            const cTemperatur = kTemperatur-273;
+            const rTemperatur = (4/5)*cTemperatur;
+            const fTemperatur = ((9/5)*cTemperatur)+32;
+            
+            celciusInput.value = cTemperatur;
+            reamurInput.value = rTemperatur;
+            fahrenheitInput.value = fTemperatur;
+        });
+    </script>
+</body>
+</html>

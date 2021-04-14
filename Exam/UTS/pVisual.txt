@@ -1,0 +1,7 @@
+Project ini berisikan Pemrograman Visual dalam pembuatan:
+- kalkulator, dan 
+- konversi suhu (celcius, reamur, fahrenheit, dan kelvin)
+
+Pemrograman visual penting untuk dipelajari karena pemrograman ini memiliki hasil akhir yang berbasis dekstop maupun berbasis web. 
+Pada kesempatan kali ini yang dipelajari adalah yang berbasis desktop. 
+Pemrograman visual memiliki keunggulan diantaranya yaitu penggunaan memori yang tidak terlalu banyak, file atau aplikasi yang dihasilkan termasuk kecil, dan banyak terdapat referensi di internet.
